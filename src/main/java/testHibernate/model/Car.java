@@ -17,7 +17,7 @@ public class Car {
     @Column(name = "horsepower")
     private int horsepower;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "person_id")
     private Person person;
 

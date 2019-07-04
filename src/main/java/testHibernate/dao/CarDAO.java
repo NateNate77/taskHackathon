@@ -34,12 +34,12 @@ public class CarDAO {
         return em.createQuery(q).getResultList();
     }
 
-    @Transactional(value = "txManager")
-    public void addCar(Car car) throws ParseException {
+//    @Transactional(value = "txManager")
+//    public void addCar(Car car) throws ParseException {
 //        Person person = em.find(Person.class, car.getPerson().getId());
 //        car.setPerson(person);
-        em.persist(car);
-
-    }
+//        em.persist(car);
+//
+//    }
 
 }

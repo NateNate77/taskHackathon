@@ -29,6 +29,7 @@
         <th>Person ID</th>
         <th>Person Name</th>
         <th>Person birthDay</th>
+        <th>Info</th>
 
     </tr>
 
@@ -50,6 +51,7 @@
                 <td>
                         ${person.dateOfBirth}
                 </td>
+                <td><a href="<c:url value='/showCard/${person.id}' />" >Persons card</a></td>
 
             <%--<td>--%>
                 <%--<a href="<c:url value="/delete/${user.id}"/>" >Delete user</a>--%>

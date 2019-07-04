@@ -30,7 +30,7 @@ public class Person {
 //    private java.util.Date dateOfBirth;
 
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Car> cars;
 
     public Person(){

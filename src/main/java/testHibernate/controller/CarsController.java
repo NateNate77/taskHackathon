@@ -49,16 +49,8 @@ public class CarsController {
     public String addNewCar(@ModelAttribute("carRequest") AddCarRequest carRequest, BindingResult bindingResult) {
         for( FieldError fieldError : bindingResult.getFieldErrors() )
             System.out.println(fieldError.getField() +" : "+fieldError.getDefaultMessage());
-        Car car = new Car(carRequest.getModel(), carRequest.getHorsePower());
 
-
-
-        try {
-            carDAO.addCar(car);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        personDAO.setCarToPerson(car, carRequest.getPersonID());
+        personDAO.setCarToPerson(carRequest, carRequest.getPersonID());
 
         return "redirect:/";
     }

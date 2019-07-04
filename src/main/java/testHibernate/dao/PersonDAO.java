@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import testHibernate.model.AddCarRequest;
 import testHibernate.model.Car;
 import testHibernate.model.Person;
 
@@ -75,10 +76,21 @@ public class PersonDAO {
     }
 
     @Transactional(value = "txManager")
-    public void setCarToPerson(Car car, int personID){
+    public void setCarToPerson(AddCarRequest carRequest, int personID){
+
+        Car car = new Car(carRequest.getModel(), carRequest.getHorsePower());
+        em.persist(car);
         Person person = em.find(Person.class, personID);
-        car.setPerson(person);
+//        car.setPerson(person);
         person.addCar(car);
+        //ну такое
+        car.setPerson(person);
+    }
+
+    @Transactional(value = "txManager")
+    public Person showCard(int id){
+        Person person = em.find(Person.class, id);
+        return person;
     }
 
 }

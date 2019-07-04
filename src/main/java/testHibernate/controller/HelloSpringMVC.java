@@ -108,6 +108,15 @@ public class HelloSpringMVC {
         return "redirect:/hello";
     }
 
+    @RequestMapping("/showCard/{id}")
+    public String showPersonCard(@PathVariable("id") int id, Model model){
+
+        model.addAttribute("person", personDAO.showCard(id));
+
+        return "personsCard";
+    }
+
+
 
 }
 

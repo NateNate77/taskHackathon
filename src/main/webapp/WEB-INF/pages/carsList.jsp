@@ -52,6 +52,7 @@
 
                     <td>
                             ${car.person.id}
+                        <%--${car.person_id}--%>
                     </td>
                 <%--<td>--%>
                 <%--<a href="<c:url value="/delete/${user.id}"/>" >Delete user</a>--%>
