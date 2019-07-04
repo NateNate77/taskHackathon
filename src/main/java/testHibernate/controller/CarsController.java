@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import testHibernate.dao.CarDAO;
 import testHibernate.dao.PersonDAO;
+import testHibernate.model.AddCarRequest;
 import testHibernate.model.Car;
 import testHibernate.model.Person;
 
@@ -39,16 +40,17 @@ public class CarsController {
 
     @RequestMapping(value = "/add-new-car", method = RequestMethod.GET)
     public String add(Model model){
-        Car car = new Car();
-        model.addAttribute("car", car);
+        AddCarRequest car = new AddCarRequest();
+        model.addAttribute("carRequest", car);
         return "addNewCar";
     }
 
     @RequestMapping(value="/add-new-car", method=RequestMethod.POST)
-    public String addNewCar(@ModelAttribute("car") Car car, BindingResult bindingResult) {
+    public String addNewCar(@ModelAttribute("carRequest") AddCarRequest carRequest, BindingResult bindingResult) {
         for( FieldError fieldError : bindingResult.getFieldErrors() )
             System.out.println(fieldError.getField() +" : "+fieldError.getDefaultMessage());
-        personDAO.setCar(car);
+        Car car = new Car(carRequest.getModel(), carRequest.getHorsePower());
+
 
 
         try {
@@ -56,6 +58,8 @@ public class CarsController {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        personDAO.setCarToPerson(car, carRequest.getPersonID());
+
         return "redirect:/";
     }
 }

@@ -16,9 +16,9 @@
 </head>
 <body>
 
-<form:form method="post" action="/HelloSpringMVC/add-new-car" modelAttribute="car">
+<form:form method="post" action="/HelloSpringMVC/add-new-car" modelAttribute="carRequest">
 
-    <form:hidden path="id" />
+    <%--<form:hidden path="id" />--%>
 
     <div >
         <h3>Введите данные</h3>
@@ -32,13 +32,13 @@
         <br>
         <div>
             <label >Horse Power</label>
-            <form:input path="horsepower" />
+            <form:input path="horsePower" />
         </div>
         <br>
         <br>
         <div>
             <label >Owner ID</label>
-            <form:input path="person" />
+            <form:input path="personID" />
         </div>
 
         <br>

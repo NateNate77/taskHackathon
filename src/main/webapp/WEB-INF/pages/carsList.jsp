@@ -51,7 +51,7 @@
             </td>
 
                     <td>
-                            ${car.ownerId}
+                            ${car.person.id}
                     </td>
                 <%--<td>--%>
                 <%--<a href="<c:url value="/delete/${user.id}"/>" >Delete user</a>--%>
@@ -73,7 +73,7 @@
 <br>
 <br>
 <div>
-    <a href="/HelloSpringMVC">Go main</a>
+    <a href="/HelloSpringMVC">Go to main</a>
 </div>
 
 </body>

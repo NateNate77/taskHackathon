@@ -75,8 +75,9 @@ public class PersonDAO {
     }
 
     @Transactional(value = "txManager")
-    public void setCar(Car car){
-        Person person = em.find(Person.class, car.getPerson().getId());
+    public void setCarToPerson(Car car, int personID){
+        Person person = em.find(Person.class, personID);
+        car.setPerson(person);
         person.addCar(car);
     }
 

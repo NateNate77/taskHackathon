@@ -21,6 +21,8 @@ public class Car {
     @JoinColumn(name = "person_id")
     private Person person;
 
+//    private int ownerId;
+
 //    @Column(name = "ownerId")
 //    private int ownerId;
 
@@ -53,6 +55,14 @@ public class Car {
     public void setPerson(Person person) {
         this.person = person;
     }
+
+//    public int getPersonId(){
+//        return person.getId();
+//    }
+//
+//    public void setPersonId(Person person){
+//        this.person.setId(person.getId());
+//    }
 
 
 //    public int getOwnerId() {

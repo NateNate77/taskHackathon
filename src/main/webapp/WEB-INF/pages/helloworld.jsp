@@ -91,7 +91,7 @@
 </div>
 <br>
 <div>
-    <a href="/HelloSpringMVC">Go main</a>
+    <a href="/HelloSpringMVC">Go to main</a>
 </div>
 
 <%--<a href="<c:url value="/add"/>" >Add new user</a>--%>
