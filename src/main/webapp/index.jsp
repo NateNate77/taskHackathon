@@ -26,5 +26,11 @@
     <a href="<c:url value="/listCars"/>" >Show cars list</a>
   </div>
 
+  <br>
+  <br>
+  <div>
+    <a href="<c:url value="/statistics"/>" >Show statistics</a>
+  </div>
+
   </body>
 </html>

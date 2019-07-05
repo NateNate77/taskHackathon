@@ -9,6 +9,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="th" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="forEach" uri="http://www.springframework.org/tags/form" %>
 
 <html>
 <head>
@@ -33,11 +35,30 @@
         <div>
             <label >Horse Power</label>
             <form:input path="horsePower" />
+
         </div>
         <br>
         <br>
         <div>
             <label >Owner ID</label>
+
+            <select id="personID">
+            </select>
+
+            <script>
+                window.onload = function(){
+                    var e = document.getElementById('personID');
+                    var arr = "${person}";
+                    for (var i = 0; i < arr.length; i++)
+                    {
+                        var option = document.createElement('option');
+                        option.innerHTML = arr[i];
+                        e.appendChild(option);
+                    }
+                }
+            </script>
+
+
             <form:input path="personID" />
         </div>
 

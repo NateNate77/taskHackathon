@@ -19,7 +19,6 @@ import java.util.List;
 
 
 @Controller
-//@RequestMapping("/hello")
 public class HelloSpringMVC {
 
     @Autowired
@@ -27,7 +26,8 @@ public class HelloSpringMVC {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         sdf.setLenient(true);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
     }
@@ -50,31 +50,6 @@ public class HelloSpringMVC {
         model.addAttribute("person", person);
     return "addNewPerson";
     }
-
-//    @RequestMapping(value="/add-new-person", method=RequestMethod.POST)
-//    public String addNewUser(@RequestParam(value="name") String name, @RequestParam(value="dayOfBirth") String dayOfBirth) {
-//
-//        try {
-//            dayOfBirth += " 00:00:00.00";
-//            personDAO.addPerson(name, dayOfBirth);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        return "redirect:/";
-//    }
-
-//    @ModelAttribute("person") Person p
-
-//    @RequestMapping(value="/add-new-person", method=RequestMethod.POST)
-////    public String addNewUser(@ModelAttribute("person") Person p) {
-////
-////        try {
-////            personDAO.addPerson(p);
-////        } catch (ParseException e) {
-////            e.printStackTrace();
-////        }
-////        return "redirect:/";
-////    }
 
 
     @RequestMapping(value="/add-new-person", method=RequestMethod.POST)

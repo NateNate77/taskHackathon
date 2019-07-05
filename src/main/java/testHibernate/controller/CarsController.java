@@ -16,6 +16,7 @@ import testHibernate.model.Car;
 import testHibernate.model.Person;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 
 @Controller
 public class CarsController {
@@ -39,9 +40,10 @@ public class CarsController {
     }
 
     @RequestMapping(value = "/add-new-car", method = RequestMethod.GET)
-    public String add(Model model){
+    public String add(Model model) throws Exception {
         AddCarRequest car = new AddCarRequest();
         model.addAttribute("carRequest", car);
+        model.addAttribute("person", personDAO.getAllPersons());
         return "addNewCar";
     }
 
@@ -53,5 +55,12 @@ public class CarsController {
         personDAO.setCarToPerson(carRequest, carRequest.getPersonID());
 
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/statistics", method = RequestMethod.GET)
+    public String getStatistics(Model model) throws Exception {
+        model.addAttribute("cars", carDAO.getAllCars());
+        model.addAttribute("persons", personDAO.getAllPersons());
+    return "statistics";
     }
 }
