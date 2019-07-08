@@ -27,7 +27,8 @@ public class HelloSpringMVC {
     @InitBinder
     public void initBinder(WebDataBinder binder) {
 //        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
         sdf.setLenient(true);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(sdf, true));
     }
@@ -53,7 +54,7 @@ public class HelloSpringMVC {
 
 
     @RequestMapping(value="/add-new-person", method=RequestMethod.POST)
-    public String addNewUser(@ModelAttribute("person") Person p, BindingResult bindingResult) {
+    public String addNewUser(@ModelAttribute("person") Person p, BindingResult bindingResult, Model model) {
         for( FieldError fieldError : bindingResult.getFieldErrors() )
             System.out.println(fieldError.getField() +" : "+fieldError.getDefaultMessage());
 
@@ -63,14 +64,16 @@ public class HelloSpringMVC {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        catch (Exception e){
+            model.addAttribute("logError", e.getMessage());
+        }
         return "redirect:/";
     }
 
 
     @RequestMapping(value = "/delete-persons", method = RequestMethod.GET)
     public String delete(){
-//        Person person = new Person();
-//        model.addAttribute("person", person);
+
         ArrayList<Person> personsForDelete = new ArrayList<Person>();
         try {
             personsForDelete = (ArrayList<Person>) personDAO.getAllPersons();

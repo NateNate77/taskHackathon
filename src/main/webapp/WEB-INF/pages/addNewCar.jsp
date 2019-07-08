@@ -27,14 +27,14 @@
 
         <div>
             <label>Model</label>
-            <form:input path="model" />
+            <form:input path="model" required="required" />
         </div>
         <br>
 
         <br>
         <div>
             <label >Horse Power</label>
-            <form:input path="horsePower" />
+            <form:input path="horsePower" required="required"/>
 
         </div>
         <br>
@@ -42,24 +42,72 @@
         <div>
             <label >Owner ID</label>
 
-            <select id="personID">
+            <%--<select id="personID">--%>
+            <%--</select>--%>
+
+            <%--<script>--%>
+                <%--window.onload = function(){--%>
+                    <%--var e = document.getElementById('personID');--%>
+                    <%--var arr = "${person}";--%>
+                    <%--for (var i = 0; i < arr.length; i++)--%>
+                    <%--{--%>
+                        <%--var option = document.createElement('option');--%>
+                        <%--option.innerHTML = arr[i];--%>
+                        <%--e.appendChild(option);--%>
+                    <%--}--%>
+                <%--}--%>
+            <%--</script>--%>
+
+            <select name="persons" id="personsID" onchange="change()">
+                <c:forEach var="person" items="${person}">
+                    <option value="${person.id}">${person.name}</option>
+                </c:forEach>
             </select>
 
+            <%--<script type="text/javascript">--%>
+                <%--SelectDefault();--%>
+            <%--</script>--%>
+
             <script>
-                window.onload = function(){
-                    var e = document.getElementById('personID');
-                    var arr = "${person}";
-                    for (var i = 0; i < arr.length; i++)
-                    {
-                        var option = document.createElement('option');
-                        option.innerHTML = arr[i];
-                        e.appendChild(option);
-                    }
-                }
+                window.onload = function() {
+                    document.getElementById("personsID").options[0].selected=true;
+                    document.getElementById('personID').value = document.getElementById("personsID").options[0].value;
+                };
             </script>
+            
+            <%--<script>--%>
+                <%--function SelectDefault() {--%>
+                    <%--document.getElementById("personsID").options[0].selected=true;--%>
+                    <%--document.getElementById('personID').value = document.getElementById("personsID").options[0].value;--%>
+                <%--}--%>
+            <%--</script>--%>
+
+           <script>
+               var targetValue;
+               var sel = document.getElementById("personsID");
+               // sel.onchange = function() {
+               //
+               // };
+               <%--// $('#personsID').on('change',function(){ $('#persons').val(this.options[this.selectedIndex].textContent); });--%>
+
+               function change(){
+                   targetValue = sel.value;
+                   document.getElementById('personID').value = targetValue;
+               }
 
 
-            <form:input path="personID" />
+           </script>
+
+            <form:hidden path="personID"/>
+
+            <%--<input type="hidden" id="persons" name = "PersonID">--%>
+
+
+
+
+
+
+            <%--<form:input path="personID" />--%>
         </div>
 
         <br>

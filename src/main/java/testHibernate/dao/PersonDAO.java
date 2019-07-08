@@ -16,6 +16,7 @@ import javax.persistence.criteria.Root;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -42,25 +43,14 @@ public class PersonDAO {
     }
 
 
-//    public void addPerson(String name, String dateOfBirth) throws ParseException {
-//
-//    Person person = new Person();
-//    person.setName(name);
-//    person.setDateOfBirth(dateOfBirth);
-// 	  em.persist(person);
-// 	  LOGGER.info("ADD PERSON!!!!!!!!!!");
-//
-//      }
     @Transactional(value = "txManager")
-    public void addPerson(Person p) throws ParseException {
+    public void addPerson(Person p) throws Exception {
 
-//        if(p.getId() == 0){
-//            p.setId((int) (Math.random()*10000));
-//        }
+        if(p.getName()==null){
 
-//        Person person = new Person();
-//        person.setName(name);
-//        person.setDateOfBirth(dateOfBirth);
+            throw new Exception("Введите имя");
+        }
+
         em.persist(p);
         LOGGER.info("ADD PERSON!!!!!!!!!!");
 

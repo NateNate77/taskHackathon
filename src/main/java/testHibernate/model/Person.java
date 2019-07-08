@@ -40,6 +40,7 @@ public class Person {
     public Person(int id, String name, String dateBirth) throws ParseException {
 //        Date date = new SimpleDateFormat("dd.MM.yyyy").parse(dateOfBirth);
         DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
         date = format.parse(dateBirth);
         this.id = id;

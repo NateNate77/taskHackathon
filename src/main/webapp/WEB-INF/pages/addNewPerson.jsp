@@ -74,14 +74,16 @@
 
         <div>
             <label>Name</label>
-            <form:input path="name" />
+            <form:input path="name" required="required"/>
+            <%--<span th:if="${logError != null}" class="error alert alert-danger" th:text="${logError}"></span>--%>
         </div>
         <br>
 
         <br>
         <div>
             <label >Date of birth</label>
-            <form:input path="dateOfBirth" />
+            <form:input type="date" path="dateOfBirth" required="required"/>
+                <%--<form:input path="dateOfBirth" />--%>
 
         </div>
         <br>
