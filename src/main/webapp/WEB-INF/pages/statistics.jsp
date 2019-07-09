@@ -20,7 +20,12 @@ ${fn:length(persons)}
 ${fn:length(cars)}
 
 <br>
+<h2>Count unique manufacturer:</h2>
+<%--${fn:length(cars)}--%>
+
 <br>
+<br>
+
 <div>
     <a href="/HelloSpringMVC">Go to main</a>
 </div>

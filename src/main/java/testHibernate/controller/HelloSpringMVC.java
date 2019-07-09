@@ -66,6 +66,7 @@ public class HelloSpringMVC {
         }
         catch (Exception e){
             model.addAttribute("logError", e.getMessage());
+            return "addNewPerson";
         }
         return "redirect:/";
     }

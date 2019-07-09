@@ -11,6 +11,9 @@ public class Car {
     @GeneratedValue
     private int id;
 
+    @Column
+    private String vendor;
+
     @Column(name = "model")
     private String model;
 
@@ -30,9 +33,11 @@ public class Car {
 
     }
 
-    public Car(String model, int horsepower){
+    public Car(String vendor, String model, int horsepower){
+        this.vendor = vendor;
         this.model = model;
         this.horsepower = horsepower;
+
 //        this.ownerId = ownerId;
     }
 
@@ -65,13 +70,23 @@ public class Car {
 //    }
 
 
-//    public int getOwnerId() {
+    public String getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
+    }
+
+
+    //    public int getOwnerId() {
 //        return ownerId;
 //    }
 //
 //    public void setOwnerId(int ownerId) {
 //        this.ownerId = ownerId;
 //    }
+
 
     public void setModel(String model) {
         this.model = model;

@@ -4,6 +4,8 @@ public class AddCarRequest {
 
     private String model;
 
+    private String vendor;
+
     private int horsePower;
 
     private int personID;
@@ -12,8 +14,9 @@ public class AddCarRequest {
 
     }
 
-    public AddCarRequest(String model, int horsePower, int personID) {
+    public AddCarRequest(String vendor, String model, int horsePower, int personID) {
         this.model = model;
+        this.vendor = vendor;
         this.horsePower = horsePower;
         this.personID = personID;
     }
@@ -40,5 +43,13 @@ public class AddCarRequest {
 
     public void setPersonID(int personID) {
         this.personID = personID;
+    }
+
+    public String getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(String vendor) {
+        this.vendor = vendor;
     }
 }

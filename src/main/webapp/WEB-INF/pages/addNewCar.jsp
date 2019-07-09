@@ -27,7 +27,13 @@
 
         <div>
             <label>Model</label>
-            <form:input path="model" required="required" />
+            <form:input path="vendor" required="required" />-<form:input path="model" required="required" />
+
+
+            <%--<c:if test="${not empty logError}">--%>
+                <%--${logError}--%>
+            <%--</c:if>--%>
+
         </div>
         <br>
 
@@ -35,6 +41,9 @@
         <div>
             <label >Horse Power</label>
             <form:input path="horsePower" required="required"/>
+            <c:if test="${not empty logError}">
+                ${logError}
+            </c:if>
 
         </div>
         <br>
@@ -118,6 +127,9 @@
     </div>
 
 </form:form>
+
+
+<a href="/HelloSpringMVC">Go to main</a>
 
 </body>
 </html>

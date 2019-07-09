@@ -44,7 +44,7 @@
                     ${car.id}
             </td>
             <td>
-                    ${car.model}
+                    ${car.vendor}-${car.model}
             </td>
             <td>
                     ${car.horsepower}

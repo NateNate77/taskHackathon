@@ -65,17 +65,16 @@
     <form:hidden path="id" />
 
 
-
-
-
-
     <div >
         <h3>Введите данные</h3>
 
         <div>
             <label>Name</label>
             <form:input path="name" required="required"/>
-            <%--<span th:if="${logError != null}" class="error alert alert-danger" th:text="${logError}"></span>--%>
+            <c:if test="${not empty logError}">
+                ${logError}
+            </c:if>
+
         </div>
         <br>
 

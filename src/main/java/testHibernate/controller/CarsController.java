@@ -48,17 +48,24 @@ public class CarsController {
     }
 
     @RequestMapping(value="/add-new-car", method=RequestMethod.POST)
-    public String addNewCar(@ModelAttribute("carRequest") AddCarRequest carRequest, BindingResult bindingResult) {
+    public String addNewCar(@ModelAttribute("carRequest") AddCarRequest carRequest, BindingResult bindingResult, Model model) throws Exception {
         for( FieldError fieldError : bindingResult.getFieldErrors() )
             System.out.println(fieldError.getField() +" : "+fieldError.getDefaultMessage());
 
-        personDAO.setCarToPerson(carRequest, carRequest.getPersonID());
+        try {
+            personDAO.setCarToPerson(carRequest, carRequest.getPersonID());
+        } catch (Exception e) {
+            model.addAttribute("logError", e.getMessage());
+            model.addAttribute("person", personDAO.getAllPersons());
+            return "addNewCar";
+        }
 
         return "redirect:/";
     }
 
     @RequestMapping(value = "/statistics", method = RequestMethod.GET)
     public String getStatistics(Model model) throws Exception {
+
         model.addAttribute("cars", carDAO.getAllCars());
         model.addAttribute("persons", personDAO.getAllPersons());
     return "statistics";

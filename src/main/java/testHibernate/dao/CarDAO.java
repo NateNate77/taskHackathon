@@ -35,6 +35,13 @@ public class CarDAO {
     }
 
 //    @Transactional(value = "txManager")
+//    public List<String> getCarNames(){
+//        List<String> carNames = em.getCriteriaBuilder();
+//        return carNames;
+//
+//    }
+
+//    @Transactional(value = "txManager")
 //    public void addCar(Car car) throws ParseException {
 //        Person person = em.find(Person.class, car.getPerson().getId());
 //        car.setPerson(person);

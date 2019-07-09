@@ -46,7 +46,9 @@ public class PersonDAO {
     @Transactional(value = "txManager")
     public void addPerson(Person p) throws Exception {
 
-        if(p.getName()==null){
+        String namePerson = p.getName().trim();
+
+        if(p.getName()==null || namePerson.equals("") || namePerson==null){
 
             throw new Exception("Введите имя");
         }
@@ -66,9 +68,18 @@ public class PersonDAO {
     }
 
     @Transactional(value = "txManager")
-    public void setCarToPerson(AddCarRequest carRequest, int personID){
+    public void setCarToPerson(AddCarRequest carRequest, int personID) throws Exception {
 
-        Car car = new Car(carRequest.getModel(), carRequest.getHorsePower());
+        String carVendor = carRequest.getVendor().replace("-", "");
+
+        Car car = new Car(carVendor, carRequest.getModel(), carRequest.getHorsePower());
+//        String modelCar = car.getModel().trim();
+//        if(modelCar.equals("") || car.getHorsepower()<=0){
+//            throw new Exception("Введите модель");
+//        }
+        if(car.getHorsepower()<=0){
+            throw new Exception("Значение должно быть больше 0!");
+        }
         em.persist(car);
         Person person = em.find(Person.class, personID);
 //        car.setPerson(person);
