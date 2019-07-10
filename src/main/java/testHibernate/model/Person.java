@@ -33,6 +33,11 @@ public class Person {
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Car> cars;
 
+    @Column
+    private int age;
+
+    private String dateOfBirtToString;
+
     public Person(){
 
     }
@@ -59,6 +64,32 @@ public class Person {
         this.dateOfBirth = date;
         cars = new ArrayList<Car>();
     }
+
+    public Person(String name, String dateBirth, int age) throws ParseException {
+//        Date date = new SimpleDateFormat("dd.MM.yyyy").parse(dateOfBirth);
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+        Date date = new Date();
+        date = format.parse(dateBirth);
+//        temporalValues.setUtil(new SimpleDateFormat("dd.MM.yyyy").parse(dateOfBirth));
+        this.name = name;
+        this.dateOfBirth = date;
+        cars = new ArrayList<Car>();
+        this.age = age;
+    }
+
+    public Person(int id, String name, String dateBirth, int age) throws ParseException {
+//        Date date = new SimpleDateFormat("dd.MM.yyyy").parse(dateOfBirth);
+        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        date = format.parse(dateBirth);
+        this.id = id;
+//        temporalValues.setUtil(new SimpleDateFormat("dd.MM.yyyy").parse(dateOfBirth));
+        this.name = name;
+        this.dateOfBirth = date;
+        this.age = age;
+    }
+
 
     public void addCar(Car car) {
 //        car.setPerson(this);
@@ -126,5 +157,20 @@ public class Person {
 //        }
 //        this.dateOfBirth = date;
 //    }
+
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getDateOfBirtToString(){
+        SimpleDateFormat df2 = new SimpleDateFormat("dd.MM.yyyy");
+        String dateBirth = df2.format(this.dateOfBirth);
+        return dateBirth;
+    }
 
 }

@@ -83,6 +83,9 @@
             <label >Date of birth</label>
             <form:input type="date" path="dateOfBirth" required="required"/>
                 <%--<form:input path="dateOfBirth" />--%>
+            <c:if test="${not empty logError2}">
+                ${logError2}
+            </c:if>
 
         </div>
         <br>

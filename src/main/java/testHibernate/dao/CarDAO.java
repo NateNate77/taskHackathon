@@ -8,6 +8,7 @@ import testHibernate.model.Person;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -32,6 +33,26 @@ public class CarDAO {
         q.select(root);
 
         return em.createQuery(q).getResultList();
+    }
+
+    @Transactional(value = "txManager")
+    public List<String> getManufacturer(){
+//        List<String> manufacturers = em
+//                .createQuery(
+//                        "select distinct vendor(p.vendor) " +
+//                                "from Car p " +
+//                                "order by vendor(p.vendor)", String.class)
+//                .getResultList();
+
+        List<String> manufacturers = em
+                .createQuery(
+                        "select distinct p.vendor from Car p order by p.vendor", String.class)
+                .getResultList();
+        for (int i = 0; i < manufacturers.size(); i++){
+            System.out.println(manufacturers.get(i));
+        }
+
+        return manufacturers;
     }
 
 //    @Transactional(value = "txManager")

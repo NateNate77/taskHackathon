@@ -24,10 +24,22 @@
 
     <div >
         <h3>Введите данные</h3>
+        <br>
+        <c:if test="${not empty logErrorEmptyOwner}">
+            ${logErrorEmptyOwner}
+            <br>
+        </c:if>
+
 
         <div>
             <label>Model</label>
             <form:input path="vendor" required="required" />-<form:input path="model" required="required" />
+
+            <c:if test="${not empty logErrorEmptyName}">
+                ${logErrorEmptyName}
+                <br>
+            </c:if>
+
 
 
             <%--<c:if test="${not empty logError}">--%>

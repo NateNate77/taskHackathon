@@ -4,12 +4,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import testHibernate.exception.ExceptionDate;
+import testHibernate.exception.ExceptionEmptyName;
 import testHibernate.model.AddCarRequest;
 import testHibernate.model.Car;
 import testHibernate.model.Person;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -42,16 +45,51 @@ public class PersonDAO {
         return em.createQuery(q).getResultList();
     }
 
+    @Transactional(value = "txManager")
+    public List<Person> getAllAdultPerson() throws Exception {
+
+        List<Person> adultPerson = em.createQuery("select p from Person p where p.age > 17", Person.class).getResultList();
+
+//        return (List<Person>) em.createQuery("select p from Person p where p.age > 18", Person.class);
+//        CriteriaBuilder cb = em.getCriteriaBuilder();
+//        CriteriaQuery<Person> q = cb.createQuery(Person.class);
+//        Root<Person> root = q.from(Person.class);
+//        q.select(root);
+//        List<Person> persons = em.createQuery(q).getResultList();
+//        List<Person> adultPerson = new ArrayList<Person>();
+//        for (int i = 0; i < persons.size(); i++){
+//            if(persons.get(i).getAge()>17){
+//                adultPerson.add(persons.get(i));
+//            }
+//        }
+        return adultPerson;
+    }
+
 
     @Transactional(value = "txManager")
     public void addPerson(Person p) throws Exception {
+
+        Date currentDate = new Date();
+
+        if(currentDate.compareTo(p.getDateOfBirth())<1){
+
+            throw new ExceptionDate("Дата рождения не может быть в будущем");
+        }
 
         String namePerson = p.getName().trim();
 
         if(p.getName()==null || namePerson.equals("") || namePerson==null){
 
-            throw new Exception("Введите имя");
+            throw new ExceptionEmptyName("Введите имя");
         }
+
+
+        long ageInMillis = new Date().getTime() - p.getDateOfBirth().getTime();
+
+        Date ageDate = new Date(ageInMillis);
+        int age = ageDate.getYear() - 70;
+        p.setAge(age);
+
 
         em.persist(p);
         LOGGER.info("ADD PERSON!!!!!!!!!!");
@@ -70,9 +108,13 @@ public class PersonDAO {
     @Transactional(value = "txManager")
     public void setCarToPerson(AddCarRequest carRequest, int personID) throws Exception {
 
-        String carVendor = carRequest.getVendor().replace("-", "");
+        String carVendor = carRequest.getVendor().replace("-", "").trim();
+        String carModel = carRequest.getModel().trim();
+        if(carVendor.equals("") || carModel.equals("")){
+            throw new ExceptionEmptyName("Введите модель");
+        }
 
-        Car car = new Car(carVendor, carRequest.getModel(), carRequest.getHorsePower());
+        Car car = new Car(carVendor, carModel, carRequest.getHorsePower());
 //        String modelCar = car.getModel().trim();
 //        if(modelCar.equals("") || car.getHorsepower()<=0){
 //            throw new Exception("Введите модель");

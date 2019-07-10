@@ -23,7 +23,9 @@
 
 <h2>Date of Birth</h2>
 <div>
-    ${person.dateOfBirth}
+    <%--${person.dateOfBirth}--%>
+    ${person.dateOfBirtToString}
+    <%--${date}--%>
 </div>
 
 <br>
@@ -38,7 +40,7 @@
         <tr>
 
             <td>
-                    ${car.model}
+                    ${car.vendor}-${car.model}
             </td>
 
         </tr>

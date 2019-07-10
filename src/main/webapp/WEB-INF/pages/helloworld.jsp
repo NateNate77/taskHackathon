@@ -49,7 +49,8 @@
                         ${person.name}
                 </td>
                 <td>
-                        ${person.dateOfBirth}
+                        <%--${person.dateOfBirth}--%>
+                                ${person.dateOfBirtToString}
                 </td>
                 <td><a href="<c:url value='/showCard/${person.id}' />" >Persons card</a></td>
 

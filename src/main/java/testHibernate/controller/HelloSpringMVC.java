@@ -9,6 +9,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import testHibernate.dao.PersonDAO;
+import testHibernate.exception.ExceptionDate;
+import testHibernate.exception.ExceptionEmptyName;
 import testHibernate.model.Person;
 
 import java.text.ParseException;
@@ -54,9 +56,19 @@ public class HelloSpringMVC {
 
 
     @RequestMapping(value="/add-new-person", method=RequestMethod.POST)
-    public String addNewUser(@ModelAttribute("person") Person p, BindingResult bindingResult, Model model) {
+    public String addNewUser(@ModelAttribute("person") Person p, BindingResult bindingResult, Model model) throws Exception {
         for( FieldError fieldError : bindingResult.getFieldErrors() )
             System.out.println(fieldError.getField() +" : "+fieldError.getDefaultMessage());
+
+//        Date currentDate = new Date();
+
+//        System.out.println(currentDate);
+//        System.out.println(p.getDateOfBirth());
+        //0 или 1 - дата до текущей или равна ей
+//        int compare = currentDate.compareTo(p.getDateOfBirth());
+//        int compareTwo = p.getDateOfBirth().compareTo(currentDate);
+//        System.out.println(compare);
+//        System.out.println(compareTwo);
 
 
         try {
@@ -64,8 +76,14 @@ public class HelloSpringMVC {
         } catch (ParseException e) {
             e.printStackTrace();
         }
-        catch (Exception e){
+        catch (ExceptionEmptyName e){
             model.addAttribute("logError", e.getMessage());
+            return "addNewPerson";
+        }
+
+        catch (ExceptionDate e){
+
+            model.addAttribute("logError2", e.getMessage());
             return "addNewPerson";
         }
         return "redirect:/";
@@ -91,6 +109,7 @@ public class HelloSpringMVC {
     public String showPersonCard(@PathVariable("id") int id, Model model){
 
         model.addAttribute("person", personDAO.showCard(id));
+//        model.addAttribute("date", personDAO.showCard(id).dateOfBirtToString());
 
         return "personsCard";
     }

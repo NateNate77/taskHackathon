@@ -22,6 +22,7 @@ ${fn:length(cars)}
 <br>
 <h2>Count unique manufacturer:</h2>
 <%--${fn:length(cars)}--%>
+${fn:length(manufacturers)}
 
 <br>
 <br>
