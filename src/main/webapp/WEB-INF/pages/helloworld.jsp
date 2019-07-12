@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Chekireva
-  Date: 24.04.2019
-  Time: 17:29
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -20,7 +14,7 @@
 
 </head>
 <body>
-<%--<h1>${greeting}</h1>--%>
+
 <br>
 <h3>Persons List</h3>
 <br>
@@ -35,12 +29,6 @@
 
     <c:forEach var="person" items="${persons}">
         <tr>
-            <%--<td>--%>
-                <%--<c:out value="${person.id}"/>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<c:out value="${person.name}"/>--%>
-            <%--</td>--%>
 
                 <td>
                         ${person.id}
@@ -49,14 +37,10 @@
                         ${person.name}
                 </td>
                 <td>
-                        <%--${person.dateOfBirth}--%>
                                 ${person.dateOfBirtToString}
                 </td>
                 <td><a href="<c:url value='/showCard/${person.id}' />" >Persons card</a></td>
 
-            <%--<td>--%>
-                <%--<a href="<c:url value="/delete/${user.id}"/>" >Delete user</a>--%>
-            <%--</td>--%>
         </tr>
     </c:forEach>
     <c:if test="${empty persons}">
@@ -68,20 +52,6 @@
 <br>
 <br>
 <br>
-
-<%--<div>--%>
-    <%--<button onclick="location.href='/add-new-person'">Создать</button>--%>
-
-<%--</div>--%>
-
-
-<%--<div>--%>
-    <%--<a href="<c:url value="/add-new-person"/>" >Add person</a>--%>
-<%--</div>--%>
-
-<%--<div>--%>
-    <%--<c:url var="action" value="/add-new-person" >Add person</c:url>--%>
-<%--</div>--%>
 
 
 <div>
@@ -97,7 +67,6 @@
     <a href="/HelloSpringMVC">Go to main</a>
 </div>
 
-<%--<a href="<c:url value="/add"/>" >Add new user</a>--%>
 
 </body>
 </html>

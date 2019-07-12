@@ -48,21 +48,17 @@ public class PersonDAO {
     @Transactional(value = "txManager")
     public List<Person> getAllAdultPerson() throws Exception {
 
-        List<Person> adultPerson = em.createQuery("select p from Person p where p.age > 17", Person.class).getResultList();
+        //List<Person> adultPerson = em.createQuery("select p from Person p where p.age > 17", Person.class).getResultList();
 
-//        return (List<Person>) em.createQuery("select p from Person p where p.age > 18", Person.class);
-//        CriteriaBuilder cb = em.getCriteriaBuilder();
-//        CriteriaQuery<Person> q = cb.createQuery(Person.class);
-//        Root<Person> root = q.from(Person.class);
-//        q.select(root);
-//        List<Person> persons = em.createQuery(q).getResultList();
-//        List<Person> adultPerson = new ArrayList<Person>();
-//        for (int i = 0; i < persons.size(); i++){
-//            if(persons.get(i).getAge()>17){
-//                adultPerson.add(persons.get(i));
-//            }
-//        }
-        return adultPerson;
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Person> q = cb.createQuery(Person.class);
+        Root<Person> root = q.from(Person.class);
+        q.where(cb.greaterThan(root.<Integer>get("age"), 17));
+        q.select(root);
+
+        return em.createQuery(q).getResultList();
+
+        //return adultPerson;
     }
 
 
@@ -115,10 +111,7 @@ public class PersonDAO {
         }
 
         Car car = new Car(carVendor, carModel, carRequest.getHorsePower());
-//        String modelCar = car.getModel().trim();
-//        if(modelCar.equals("") || car.getHorsepower()<=0){
-//            throw new Exception("Введите модель");
-//        }
+
         if(car.getHorsepower()<=0){
             throw new Exception("Значение должно быть больше 0!");
         }

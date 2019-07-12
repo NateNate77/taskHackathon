@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Chekireva
-  Date: 03.07.2019
-  Time: 16:21
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -19,8 +13,6 @@
 <body>
 
 <form:form method="post" action="/HelloSpringMVC/add-new-car" modelAttribute="carRequest">
-
-    <%--<form:hidden path="id" />--%>
 
     <div >
         <h3>Введите данные</h3>
@@ -41,11 +33,6 @@
             </c:if>
 
 
-
-            <%--<c:if test="${not empty logError}">--%>
-                <%--${logError}--%>
-            <%--</c:if>--%>
-
         </div>
         <br>
 
@@ -63,21 +50,6 @@
         <div>
             <label >Owner ID</label>
 
-            <%--<select id="personID">--%>
-            <%--</select>--%>
-
-            <%--<script>--%>
-                <%--window.onload = function(){--%>
-                    <%--var e = document.getElementById('personID');--%>
-                    <%--var arr = "${person}";--%>
-                    <%--for (var i = 0; i < arr.length; i++)--%>
-                    <%--{--%>
-                        <%--var option = document.createElement('option');--%>
-                        <%--option.innerHTML = arr[i];--%>
-                        <%--e.appendChild(option);--%>
-                    <%--}--%>
-                <%--}--%>
-            <%--</script>--%>
 
             <select name="persons" id="personsID" onchange="change()">
                 <c:forEach var="person" items="${person}">
@@ -85,9 +57,6 @@
                 </c:forEach>
             </select>
 
-            <%--<script type="text/javascript">--%>
-                <%--SelectDefault();--%>
-            <%--</script>--%>
 
             <script>
                 window.onload = function() {
@@ -95,21 +64,11 @@
                     document.getElementById('personID').value = document.getElementById("personsID").options[0].value;
                 };
             </script>
-            
-            <%--<script>--%>
-                <%--function SelectDefault() {--%>
-                    <%--document.getElementById("personsID").options[0].selected=true;--%>
-                    <%--document.getElementById('personID').value = document.getElementById("personsID").options[0].value;--%>
-                <%--}--%>
-            <%--</script>--%>
+
 
            <script>
                var targetValue;
                var sel = document.getElementById("personsID");
-               // sel.onchange = function() {
-               //
-               // };
-               <%--// $('#personsID').on('change',function(){ $('#persons').val(this.options[this.selectedIndex].textContent); });--%>
 
                function change(){
                    targetValue = sel.value;
@@ -121,14 +80,6 @@
 
             <form:hidden path="personID"/>
 
-            <%--<input type="hidden" id="persons" name = "PersonID">--%>
-
-
-
-
-
-
-            <%--<form:input path="personID" />--%>
         </div>
 
         <br>

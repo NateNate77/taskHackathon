@@ -45,7 +45,6 @@ public class CarsController {
     public String add(Model model) throws Exception {
         AddCarRequest car = new AddCarRequest();
         model.addAttribute("carRequest", car);
-//        model.addAttribute("person", personDAO.getAllPersons());
         model.addAttribute("person", personDAO.getAllAdultPerson());
         return "addNewCar";
     }
@@ -70,7 +69,6 @@ public class CarsController {
         }
         catch (Exception e) {
             model.addAttribute("logError", e.getMessage());
-//            model.addAttribute("person", personDAO.getAllPersons());
             model.addAttribute("person", personDAO.getAllAdultPerson());
             return "addNewCar";
         }
@@ -80,7 +78,7 @@ public class CarsController {
 
     @RequestMapping(value = "/statistics", method = RequestMethod.GET)
     public String getStatistics(Model model) throws Exception {
-//        List<String> manufacturers = carDAO.getManufacturer();
+
         model.addAttribute("manufacturers", carDAO.getManufacturer());
         model.addAttribute("cars", carDAO.getAllCars());
         model.addAttribute("persons", personDAO.getAllPersons());

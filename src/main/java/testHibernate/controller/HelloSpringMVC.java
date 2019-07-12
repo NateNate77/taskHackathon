@@ -12,6 +12,7 @@ import testHibernate.dao.PersonDAO;
 import testHibernate.exception.ExceptionDate;
 import testHibernate.exception.ExceptionEmptyName;
 import testHibernate.model.Person;
+import testHibernate.model.PersonView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,6 +27,8 @@ public class HelloSpringMVC {
     @Autowired
     private PersonDAO personDAO;
 
+    public static final SimpleDateFormat df2 = new SimpleDateFormat("dd.MM.yyyy");
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
 //        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
@@ -39,7 +42,17 @@ public class HelloSpringMVC {
     public String hello(Model model) {
 
         try {
-            model.addAttribute("persons", personDAO.getAllPersons());
+            List<PersonView> personViews = new ArrayList<PersonView>();
+            List<Person> personList = personDAO.getAllPersons();
+
+            for (int i = 0; i < personList.size(); i++){
+
+                String dateBirth = df2.format(personList.get(i).getDateOfBirth());
+                PersonView personView = new PersonView(personList.get(i).getId(), personList.get(i).getName(), dateBirth);
+                personViews.add(personView);
+            }
+//            model.addAttribute("persons", personDAO.getAllPersons());
+            model.addAttribute("persons", personViews);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -59,17 +72,6 @@ public class HelloSpringMVC {
     public String addNewUser(@ModelAttribute("person") Person p, BindingResult bindingResult, Model model) throws Exception {
         for( FieldError fieldError : bindingResult.getFieldErrors() )
             System.out.println(fieldError.getField() +" : "+fieldError.getDefaultMessage());
-
-//        Date currentDate = new Date();
-
-//        System.out.println(currentDate);
-//        System.out.println(p.getDateOfBirth());
-        //0 или 1 - дата до текущей или равна ей
-//        int compare = currentDate.compareTo(p.getDateOfBirth());
-//        int compareTwo = p.getDateOfBirth().compareTo(currentDate);
-//        System.out.println(compare);
-//        System.out.println(compareTwo);
-
 
         try {
             personDAO.addPerson(p);
@@ -108,9 +110,11 @@ public class HelloSpringMVC {
     @RequestMapping("/showCard/{id}")
     public String showPersonCard(@PathVariable("id") int id, Model model){
 
+        Person person = personDAO.showCard(id);
+        String dateBirth = df2.format(person.getDateOfBirth());
+        PersonView personView = new PersonView(person.getId(), person.getName(), dateBirth);
+        model.addAttribute("personDateBirth", personView.getDateOfBirtToString());
         model.addAttribute("person", personDAO.showCard(id));
-//        model.addAttribute("date", personDAO.showCard(id).dateOfBirtToString());
-
         return "personsCard";
     }
 

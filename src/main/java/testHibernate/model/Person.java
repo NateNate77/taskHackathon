@@ -12,9 +12,7 @@ import java.util.List;
 @Table(name = "PERSON")
 public class Person {
 
-//    @Id
-//    @Column(name = "Id")
-//    @GeneratedValue(strategy=GenerationType.IDENTITY)
+
     @Id
     @GeneratedValue
     @Column (name = "id", nullable = false)
@@ -23,11 +21,11 @@ public class Person {
     @Column(name = "Name", length = 64, nullable = false)
     private String name;
 
-//    @Basic
+
     @Temporal(TemporalType.DATE)
     @Column(name = "dateOfBirth", nullable = false)
     private Date dateOfBirth;
-//    private java.util.Date dateOfBirth;
+
 
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
@@ -36,63 +34,16 @@ public class Person {
     @Column
     private int age;
 
-    private String dateOfBirtToString;
+//    private String dateOfBirtToString;
 
     public Person(){
 
     }
 
-    public Person(int id, String name, String dateBirth) throws ParseException {
-//        Date date = new SimpleDateFormat("dd.MM.yyyy").parse(dateOfBirth);
-        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        date = format.parse(dateBirth);
-        this.id = id;
-//        temporalValues.setUtil(new SimpleDateFormat("dd.MM.yyyy").parse(dateOfBirth));
-        this.name = name;
-        this.dateOfBirth = date;
-    }
-
-    public Person(String name, String dateBirth) throws ParseException {
-//        Date date = new SimpleDateFormat("dd.MM.yyyy").parse(dateOfBirth);
-        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-        Date date = new Date();
-        date = format.parse(dateBirth);
-//        temporalValues.setUtil(new SimpleDateFormat("dd.MM.yyyy").parse(dateOfBirth));
-        this.name = name;
-        this.dateOfBirth = date;
-        cars = new ArrayList<Car>();
-    }
-
-    public Person(String name, String dateBirth, int age) throws ParseException {
-//        Date date = new SimpleDateFormat("dd.MM.yyyy").parse(dateOfBirth);
-        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-        Date date = new Date();
-        date = format.parse(dateBirth);
-//        temporalValues.setUtil(new SimpleDateFormat("dd.MM.yyyy").parse(dateOfBirth));
-        this.name = name;
-        this.dateOfBirth = date;
-        cars = new ArrayList<Car>();
-        this.age = age;
-    }
-
-    public Person(int id, String name, String dateBirth, int age) throws ParseException {
-//        Date date = new SimpleDateFormat("dd.MM.yyyy").parse(dateOfBirth);
-        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-//        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date date = new Date();
-        date = format.parse(dateBirth);
-        this.id = id;
-//        temporalValues.setUtil(new SimpleDateFormat("dd.MM.yyyy").parse(dateOfBirth));
-        this.name = name;
-        this.dateOfBirth = date;
-        this.age = age;
-    }
 
 
     public void addCar(Car car) {
-//        car.setPerson(this);
+
         cars.add(car);
     }
 
@@ -100,27 +51,13 @@ public class Person {
         cars.remove(car);
     }
 
-
     public List<Car> getCars() {
         return cars;
     }
 
-//    public Car getCarsOne() {
-//        return cars.get(0);
-//    }
-
     public void setCars(List<Car> cars) {
         this.cars = cars;
     }
-
-//    public Person(String name, String dateBirth) throws ParseException {
-//
-//        DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-//        Date date = new Date();
-//        date = format.parse(dateBirth);
-//        this.name = name;
-//        this.dateOfBirth = date;
-//    }
 
     public void setId(int id) {
         this.id = id;
@@ -146,18 +83,6 @@ public class Person {
         this.dateOfBirth = dateOfBirth;
     }
 
-//    public void setDateOfBirth(String dateOfBirth) {
-//        DateFormat format = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss.SS");
-//        Date date = new Date();
-//        dateOfBirth += " 00:00:00.00";
-//        try {
-//            date = format.parse(dateOfBirth);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-//        this.dateOfBirth = date;
-//    }
-
 
     public int getAge() {
         return age;
@@ -167,10 +92,10 @@ public class Person {
         this.age = age;
     }
 
-    public String getDateOfBirtToString(){
-        SimpleDateFormat df2 = new SimpleDateFormat("dd.MM.yyyy");
-        String dateBirth = df2.format(this.dateOfBirth);
-        return dateBirth;
-    }
+//    public String getDateOfBirtToString(){
+//        SimpleDateFormat df2 = new SimpleDateFormat("dd.MM.yyyy");
+//        String dateBirth = df2.format(this.dateOfBirth);
+//        return dateBirth;
+//    }
 
 }

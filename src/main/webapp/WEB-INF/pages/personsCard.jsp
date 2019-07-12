@@ -21,10 +21,11 @@
 </div>
 <br>
 
-<h2>Date of Birth</h2>
+<h2>Date of Birth:</h2>
 <div>
     <%--${person.dateOfBirth}--%>
-    ${person.dateOfBirtToString}
+    <%--${person.dateOfBirtToString}--%>
+        ${personDateBirth}
     <%--${date}--%>
 </div>
 

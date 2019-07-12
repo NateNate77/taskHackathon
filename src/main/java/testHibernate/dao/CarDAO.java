@@ -37,37 +37,13 @@ public class CarDAO {
 
     @Transactional(value = "txManager")
     public List<String> getManufacturer(){
-//        List<String> manufacturers = em
-//                .createQuery(
-//                        "select distinct vendor(p.vendor) " +
-//                                "from Car p " +
-//                                "order by vendor(p.vendor)", String.class)
-//                .getResultList();
 
         List<String> manufacturers = em
                 .createQuery(
                         "select distinct p.vendor from Car p order by p.vendor", String.class)
                 .getResultList();
-        for (int i = 0; i < manufacturers.size(); i++){
-            System.out.println(manufacturers.get(i));
-        }
 
         return manufacturers;
     }
-
-//    @Transactional(value = "txManager")
-//    public List<String> getCarNames(){
-//        List<String> carNames = em.getCriteriaBuilder();
-//        return carNames;
-//
-//    }
-
-//    @Transactional(value = "txManager")
-//    public void addCar(Car car) throws ParseException {
-//        Person person = em.find(Person.class, car.getPerson().getId());
-//        car.setPerson(person);
-//        em.persist(car);
-//
-//    }
 
 }
